@@ -17,7 +17,6 @@ function load(){
     for (var i = 0, max = thestart.length; i < max; i++){
       var div = document.createElement("div");
       div.className = "flex-container";
-      thestart[i].appendChild(div);
       var webm = thestart[i].childNodes[1].childNodes[0].childNodes[0]
       var title = thestart[i].childNodes[1].childNodes[0].childNodes[1].title;
       if (title.includes("animated")){
@@ -26,30 +25,29 @@ function load(){
         div.innerHTML += '<span class="type-badge {}">{}</span>'.format(awtype.toLowerCase(), awtype)
         webm.style.display = 'none'
       }
-    }
-    for (var i = 0, max = thestart.length; i < max; i++){
+
       var title = thestart[i].childNodes[1].childNodes[0].childNodes[1].title;
       if (title.includes("safe")){        var rating = "SAFE"}
       if (title.includes("suggestive")){  var rating = "SUGGESTIVE"}
       if (title.includes("questionable")){var rating = "QUESTIONABLE"}
       if (title.includes("explicit")){    var rating = "EXPLICIT"}
-      if(rating){thestart[i].childNodes[2].innerHTML += '<span class="type-badge {}">{}</span>'.format(rating.toLowerCase(), rating);}
-    }
-    for (var i = 0, max = thestart.length; i < max; i++) {
+      if(rating){div.innerHTML += '<span class="type-badge {}">{}</span>'.format(rating.toLowerCase(), rating);}
+
       var title = thestart[i].childNodes[1].childNodes[0].childNodes[1].title;
       //console.log(thestart[i].childNodes[2])
       //var hm = thestart[i].childNodes[0].childNodes[0].childNodes[2]
 
       //console.log(ComputedStyle(hm, ['border-top-color','border-right-color','border-left-color','border-bottom-color']))
       if (title.includes("grimdark", 1) && !title.includes("semi-grimdark")) {
-        inline(thestart[i].childNodes[2], 'GRIMDARK')
+        inline(div, 'GRIMDARK')
       }
       if (title.includes("grotesque")) {
-        inline(thestart[i].childNodes[2], 'GROTESQUE')
+        inline(div, 'GROTESQUE')
       }
       if (title.includes("semi-grimdark")) {
-        inline(thestart[i].childNodes[2], 'SEMI-GRIMDARK')
+        inline(div, 'SEMI-GRIMDARK')
       }
+      thestart[i].appendChild(div);
     }
   }
   var stylecode1 = `
