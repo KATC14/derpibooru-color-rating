@@ -22,31 +22,25 @@ function load(){
       if (title.includes("animated")){
         if(title.includes("animated")){                    var awtype = 'ANIM'}
         if (webm.innerHTML.toLowerCase().includes("webm")){var awtype = 'WEBM'}
-        div.innerHTML += '<span class="type-badge {}">{}</span>'.format(awtype.toLowerCase(), awtype)
+        div.innerHTML += `<span class="type-badge ${awtype.toLowerCase()}">${awtype}</span>`
         webm.style.display = 'none'
       }
 
-      var title = thestart[i].childNodes[1].childNodes[0].childNodes[1].title;
+      //var title = thestart[i].childNodes[1].childNodes[0].childNodes[1].title;
       if (title.includes("safe")){        var rating = "SAFE"}
       if (title.includes("suggestive")){  var rating = "SUGGESTIVE"}
       if (title.includes("questionable")){var rating = "QUESTIONABLE"}
       if (title.includes("explicit")){    var rating = "EXPLICIT"}
-      if(rating){div.innerHTML += '<span class="type-badge {}">{}</span>'.format(rating.toLowerCase(), rating);}
+      if(rating){div.innerHTML += `<span class="type-badge ${rating.toLowerCase()}">${rating}</span>`;}
 
-      var title = thestart[i].childNodes[1].childNodes[0].childNodes[1].title;
+      //var title = thestart[i].childNodes[1].childNodes[0].childNodes[1].title;
       //console.log(thestart[i].childNodes[2])
       //var hm = thestart[i].childNodes[0].childNodes[0].childNodes[2]
 
       //console.log(ComputedStyle(hm, ['border-top-color','border-right-color','border-left-color','border-bottom-color']))
-      if (title.includes("grimdark", 1) && !title.includes("semi-grimdark")) {
-        inline(div, 'GRIMDARK')
-      }
-      if (title.includes("grotesque")) {
-        inline(div, 'GROTESQUE')
-      }
-      if (title.includes("semi-grimdark")) {
-        inline(div, 'SEMI-GRIMDARK')
-      }
+      if (title.includes("grimdark", 1) && !title.includes("semi-grimdark")) { div.innerHTML += inline('GRIMDARK') }
+      if (title.includes("grotesque")) {                                       div.innerHTML += inline('GROTESQUE') }
+      if (title.includes("semi-grimdark")) {                                   div.innerHTML += inline('SEMI-GRIMDARK') }
       thestart[i].appendChild(div);
     }
   }
@@ -82,6 +76,4 @@ function load(){
   addGlobalStyle(stylecode1)
 }
 load()
-function inline(origin, outline){
-  origin.innerHTML += '<span class="type-badge {}">{}</span>'.format(outline.toLowerCase(), outline);
-}
+function inline(outline){return '<span class="type-badge {}">{}</span>'.format(outline.toLowerCase(), outline);}
